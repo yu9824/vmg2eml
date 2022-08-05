@@ -4,10 +4,9 @@ import os
 import math
 
 class Convert:
-    DIR_NAME = './EMLs/'
-
     def __init__(self, fpath_vmg=None, max_message_number:int=10_000_000_000):
-        
+        DIR_NAME = './EMLs/'
+
         self.max_message_number = max_message_number
 
         if fpath_vmg is None:
@@ -28,8 +27,12 @@ class Convert:
 
         self.count = 0
         self.out_data = ''
-        if not os.path.isdir(self.DIR_NAME):
-            os.mkdir(self.DIR_NAME)
+        if not os.path.isdir(DIR_NAME):
+            os.mkdir(DIR_NAME)
+        
+        self.dirpath_output = os.path.join(DIR_NAME, os.path.splitext(self.fname_vmg)[0])
+        if not os.path.isdir(self.dirpath_output):
+            os.mkdir(self.dirpath_output)
 
     def convert(self):
         with open(self.fpath_vmg, mode='r', encoding='utf-8') as file:
@@ -38,7 +41,7 @@ class Convert:
                     raise Exception(f'Maximum number of messages reached: {self.max_message_number}')
                 if 'END:VBODY' in line:
                     count_str = str(self.count)
-                    fpath_eml = os.path.join(self.DIR_NAME, f'{os.path.splitext(self.fname_vmg)[0]}_{count_str.zfill(math.ceil(math.log10(self.max_message_number)))}.eml')
+                    fpath_eml = os.path.join(self.dirpath_output, f'{count_str.zfill(math.ceil(math.log10(self.max_message_number)))}.eml')
                     with open(fpath_eml, mode='w', encoding='utf-8') as f:
                         f.write(self.out_data)
                 self.out_data += line
