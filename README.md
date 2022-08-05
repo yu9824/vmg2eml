@@ -20,6 +20,6 @@ python3 main.py
 
 ## Environment
 
-My version is python 3.9.13, but I think python >3.6 is compatible.
+My version is python 3.9.13, but I think python >3.6 is compatible. (not checked yet)
 
 Only standard libraries are used.
