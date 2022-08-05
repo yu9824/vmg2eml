@@ -1,3 +1,4 @@
+from genericpath import isfile
 import sys
 import os
 import math
@@ -18,10 +19,12 @@ class Convert:
             self.fpath_vmg = fpath_vmg
         
         # Check if the file exists
-        if not os.path.exists(self.fpath_vmg):
+        if not os.path.isfile(self.fpath_vmg):
             raise FileNotFoundError(f'File not found: {self.fpath_vmg}')
 
         self.fname_vmg = os.path.basename(self.fpath_vmg)
+        if not self.fname_vmg.endswith('.vmg'):
+            raise Exception(f'File name must end with .vmg: {self.fname_vmg}')
 
         self.count = 0
         self.out_data = ''
