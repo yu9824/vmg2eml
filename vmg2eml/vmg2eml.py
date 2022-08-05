@@ -21,7 +21,7 @@ class Convert:
                 if 'END:VBODY' in line:
                     count_str = str(self.count)
                     f_name = self.DIR_NAME + count_str.zfill(10) + '.eml'
-                    with open(f_name, mode='w') as f:
+                    with open(f_name, mode='w', encoding='utf-8') as f:
                         f.write(self.out_data)
                 self.out_data += line
                 if 'BEGIN:VBODY' in line:
