@@ -1,6 +1,5 @@
 import sys
-from .functions import create_dir
-
+import os
 
 class Convert:
     DIR_NAME = './EMLs/'
@@ -13,7 +12,8 @@ class Convert:
             sys.exit()
         self.count = 0
         self.out_data = ''
-        create_dir(self.DIR_NAME)
+        if not os.path.isdir(self.DIR_NAME):
+            os.mkdir(self.DIR_NAME)
 
     def convert(self):
         with open(self.in_filename, mode='r', encoding='shift-jis') as file:
